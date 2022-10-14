@@ -9,33 +9,39 @@ navLinks.forEach(function (ele) {
   });
 });
 
-
 async function getWeatherApi(searsh) {
   let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a00714c1cac14f7d8b4220342221110&q=&q=${searsh}&days=3`);
   let Result = await response.json();
   disply(Result);
-  console.log(Result);
 }
 getWeatherApi('cairo');
 
 let inputsearch = document.getElementById('search');
-
 inputsearch.addEventListener('input' , function(e){
   if (e.target.value.length >= 3) {
     getWeatherApi(e.target.value);
     }
 })
 
-
 let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 let datDy = new Date();
 let dy = days[datDy.getDay()];
-let tomorrow = days[datDy.getDay()+1];
-let AfterTomorrow = days[datDy.getDay()+2];
+
+let index = datDy.getDay();
+let tomorrow ;
+index == 6 ? tomorrow = days[0] : tomorrow = days[datDy.getDay()+1];
+
+let AfterTomorrow ;
+if (index == 5) {
+  AfterTomorrow = days[0]
+} else if (index == 6) {
+  AfterTomorrow = days[1]
+} else {
+  AfterTomorrow = days[datDy.getDay()+2]
+}
 
 let forecastBox = document.getElementById('forecast');
 function disply(weatherApi){
-  // console.log(weatherApi);
   let box = `
       <div class="col-md-12 col-lg-4  today forecast">
         <div class="box">
