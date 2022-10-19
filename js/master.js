@@ -10,7 +10,7 @@ navLinks.forEach(function (ele) {
 });
 
 async function getWeatherApi(searsh) {
-  let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a00714c1cac14f7d8b4220342221110&q=&q=${searsh}&days=3`);
+  let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a00714c1cac14f7d8b4220342221110&q=${searsh}&days=3`);
   let Result = await response.json();
   disply(Result);
 }
